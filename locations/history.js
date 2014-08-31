@@ -128,7 +128,7 @@
         // TODO use router.transitionTo instead, because
         // that way we're handling errors and what not? and don't
         // update url on failed requests or smth?
-        self.navigate(link.getAttribute('href'));
+        self.navigate(link.getAttribute('href'), link.hasAttribute("data-replace"));
       };
       links.delegate(this.linkHandler);
     };
@@ -140,8 +140,8 @@
      * @private
      */
 
-    HistoryLocation.prototype.navigate = function (url) {
-      this.locationBar.update(url, {trigger: true});
+    HistoryLocation.prototype.navigate = function (url, replace) {
+      this.locationBar.update(url, {trigger: true, replace: replace});
     };
 
     /**
