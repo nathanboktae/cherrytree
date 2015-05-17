@@ -1,0 +1,19 @@
+{
+  "apps": [{
+    "name": "cherry-pick",
+    "script": "examples/cherry-pick/server",
+    "env_production": {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy": {
+    "production": {
+      "user": "app",
+      "host": "178.62.104.104",
+      "ref ": "origin/master",
+      "repo": "git@github.com:QubitProducts/cherrytree.git",
+      "path": "/home/app/apps/cherry-pick",
+      "post-deploy": "npm build && pm2 startOrRestart examples/cherry-pick/ecosystem.json --env production"
+    }
+  }
+}
