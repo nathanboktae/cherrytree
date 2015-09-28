@@ -1,7 +1,7 @@
 # Cherrytree
 
-[![Build Status](https://travis-ci.org/QubitProducts/cherrytree.svg)](https://travis-ci.org/QubitProducts/cherrytree)
-[![build status](https://www.codeship.io/projects/aa5e37b0-aeb1-0131-dd5f-06fd12e6a611/status)](https://codeship.com/projects/19734)
+[![Build Status](https://travis-ci.org/QubitProducts/cherrytree.svg?branch=master)](https://travis-ci.org/QubitProducts/cherrytree)
+[![build status](https://www.codeship.io/projects/aa5e37b0-aeb1-0131-dd5f-06fd12e6a611/status?branch=master)](https://codeship.com/projects/19734)
 
 Cherrytree is a flexible hierarchical router. Cherrytree translates each URL change to a transition object and applies your middleware functions that translate the transition data into the desired state of your application.
 
@@ -22,9 +22,18 @@ In an AMD environment, require the standalone UMD build - this version has all o
 
     require('cherrytree/standalone')
 
+# Browser Support
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/cherrytree.svg)](https://saucelabs.com/u/cherrytree)
+
+Cherrytree works in all modern browsers. It requires es5 environment and es6 promises. Use polyfills for those if you have to support older browsers, e.g.:
+
+* https://github.com/es-shims/es5-shim
+* https://github.com/jakearchibald/es6-promise
+
 # Size
 
-The size excluding all deps is ~10.96 kB gzipped and the standalone build with all deps is ~12.82 kB gzipped.
+The size excluding all deps is ~4.9kB gzipped and the standalone build with all deps is ~8.15kB gzipped.
 
 # Usage
 
@@ -40,7 +49,6 @@ router.map(function (route) {
     route('messages')
     route('status', {path: ':user/status/:id'})
     route('profile', {path: ':user'}, function () {
-      route('profile.index')
       route('profile.lists')
       route('profile.edit')
     })
@@ -156,7 +164,6 @@ Configure the router with a route map. E.g.
 ```js
 router.map(function (route) {
   route('app', {path: '/'}, function () {
-    route('index')
     route('about')
     route('post', {path: ':postId'}, function () {
       route('show')
@@ -256,9 +263,8 @@ During every transition, you can inspect `transition.routes` and `transition.pre
 
 * `name` - e.g. `'message'`
 * `path` - the path segment, e.g. `'message/:id'`
-* `paramNames` - a list of dynamic param names, e.g `['id']`
+* `params` - a list of params specifically for this route, e.g `{id: 1}`
 * `options` - the options object that was passed to the `route` function in the `map`
-* `ancestors` - an array of route names that are parents of this route, e.g. `['application', 'profile']`
 
 ### router.listen()
 
